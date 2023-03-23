@@ -1,0 +1,81 @@
+.main-content .block{
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+}
+
+.main-content {
+    background-color: yellow;
+}
+
+.block {
+    padding: 15px 20px;
+    font-size: 19px;
+}
+
+.block.text {
+    float: right;
+    width: 300px;
+    height: 50px;
+    overflow-y: hidden;
+    cursor: none;
+}
+
+.block.text .wrap{
+    background-color: white;
+    padding: 3px 10px;
+    border-radius: 25px;
+    margin-top: -5px;
+    margin-bottom: -3px;
+    border: 1px solid rgba(128, 128, 128, 0.534);
+}
+
+.block.text mat-icon{
+    position: relative;
+    top: 6px;
+    right: -10px;
+}
+
+.block.text input{
+    border: none;
+    outline: none;
+    font-size: 15px;
+}
+
+.block.cart {
+    float: right;
+}
+
+.block.profile {
+    float: right;
+    width: 200px;
+}
+
+.block.profile:hover .user {
+    display: block;
+    position: absolute;
+    right: 20px;
+    z-index: 100;
+}
+
+.block.profile .user {
+    font-size: 17px;
+    padding: 15px 3px;
+    background-color: rgb(184, 180, 180);
+    margin-top: 15px;
+    box-shadow: 1px 1px 8px gray;
+    border-radius: 10px;
+    display: none;
+}
+
+.main-content .block:hover {
+    background-color: rgba(0, 0, 0, 0.274);
+}
+
+.main-content .block.text:hover {
+    background-color: white;
+}
+
+.main-content .block.profile:hover {
+    background-color: white;
+}

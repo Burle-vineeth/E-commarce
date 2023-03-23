@@ -1,0 +1,145 @@
+<div *ngIf="admin" class="spinner">
+    <mat-spinner *ngIf="spin" diameter="40"></mat-spinner>
+    <button (click)="orderPlace()" mat-raised-button color="accent">
+        Buy Now
+    </button>
+</div>
+<div class="main-content">
+
+    <div class="block" *ngFor="let item of firstList;index as i">
+        <mat-card class="example-card">
+            <mat-card-header>
+            </mat-card-header>
+            <img mat-card-image [src]="item.image" alt="Photo of a Shiba Inu">
+            <mat-card-content>
+                <p>
+                    <strong>
+                        Item Name : 
+                    </strong>
+                    {{ item.item }}
+                </p>
+                <p>
+                    <strong>
+                        Item Cost : 
+                    </strong>
+                    {{ item.cost | currency:'INR':'symbol':'.1-1' }}
+                </p>
+                <p>
+                    <strong>
+                        Quantity : 
+                    </strong>
+                    {{ item.quantity }}
+                </p>
+            </mat-card-content>
+            <mat-card-actions align="end">
+                <button mat-raised-button>Add</button>
+                <button mat-raised-button color="warn" (click)="removeCart(item,i,1)">Remove</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+
+    <div class="block" *ngFor="let item of secondList;index as i">
+        <mat-card class="example-card">
+            <mat-card-header>
+            </mat-card-header>
+            <img mat-card-image [src]="item.image" alt="Photo of a Shiba Inu">
+            <mat-card-content>
+                <p>
+                    <strong>
+                        Item Name : 
+                    </strong>
+                    {{ item.item }}
+                </p>
+                <p>
+                    <strong>
+                        Item Cost : 
+                    </strong>
+                    {{ item.cost | currency:'INR':'symbol':'.1-1' }}
+                </p>
+                <p>
+                    <strong>
+                        Quantity : 
+                    </strong>
+                    {{ item.quantity }}
+                </p>
+            </mat-card-content>
+            <mat-card-actions align="end">
+                <button mat-raised-button>Add</button>
+                <button mat-raised-button color="warn" (click)="removeCart(item,i,2)">Remove</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+
+
+    <div class="block" *ngFor="let item of thirdList;index as i">
+        <mat-card class="example-card">
+            <mat-card-header>
+            </mat-card-header>
+            <img mat-card-image [src]="item.image" alt="Photo of a Shiba Inu">
+            <mat-card-content>
+                <p>
+                    <strong>
+                        Item Name : 
+                    </strong>
+                    {{ item.item }}
+                </p>
+                <p>
+                    <strong>
+                        Item Cost : 
+                    </strong>
+                    {{ item.cost | currency:'INR':'symbol':'.1-1' }}
+                </p>
+                <p>
+                    <strong>
+                        Quantity : 
+                    </strong>
+                    {{ item.quantity }}
+                </p>
+            </mat-card-content>
+            <mat-card-actions align="end">
+                <button mat-raised-button>Add</button>
+                <button mat-raised-button color="warn" (click)="removeCart(item,i,3)">Remove</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>
+
+
+<div *ngIf="empty" class="empty text-center my-5">
+    You haven't <strong class="text-danger">
+        Added
+    </strong>  (or) 
+    <strong class="text-danger">
+        Booked
+    </strong>  any Products
+    <div class="home row">
+        <mat-card (click)="navigateTab('grocery')" class="example-card col-sm-3">
+            <mat-card-header>
+            </mat-card-header>
+            <img mat-card-image src="../../assets/car10.jpeg" alt="Photo of a Shiba Inu">
+            <mat-card-content>
+                Groceries
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card  (click)="navigateTab('fruits')" class="example-card col-sm-3">
+            <mat-card-header>
+            </mat-card-header>
+            <img mat-card-image src="../../assets/car5.jpeg" alt="Photo of a Shiba Inu">
+            <mat-card-content>
+                Fruits
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card (click)="navigateTab('others')"  class="example-card col-sm-3">
+            <mat-card-header>
+            </mat-card-header>
+            <img mat-card-image src="../../assets/car1.jpeg" alt="Photo of a Shiba Inu">
+            <mat-card-content>
+                Others
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

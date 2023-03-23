@@ -1,0 +1,57 @@
+.content-orders .block {
+    display: inline-block;
+    max-width: 300px;
+    box-shadow: 1px 1px 5px gray;
+    border-radius: 15px;
+    margin: 10px;
+}
+
+.content-orders .block img {
+    width: 100%;
+}
+
+.title {
+    font-size: 23px;
+    line-height: 30px;
+    margin: 10px;
+    text-decoration: underline;
+}
+
+.empty {
+    font-size: xx-large;
+    margin: 10px 0;
+}
+
+.home {
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+.home mat-card {
+    position: relative;
+    cursor: pointer;
+}
+
+.home mat-card-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: black;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 40px;
+}
+
+.home mat-card img {
+    height: 200px;
+}
+
+.home mat-card:hover mat-card-content{
+    color: yellow;
+    font-size: 35px;
+}
+
+.home mat-card:hover {
+    box-shadow: 0px 0px 15px gray;
+}

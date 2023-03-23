@@ -1,0 +1,22 @@
+<div class="main-content row">
+
+    <div class="block img col-5">
+        <img [src]="modalImage.image" alt="">
+    </div>
+    <div class="block col-5">
+        <div class="title">
+            {{ modalImage.item }}
+        </div>
+        <div class="block-info">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore quas tenetur illo, laborum, distinctio placeat eveniet esse nihil ipsa nostrum illum exercitationem aspernatur? Quidem voluptatum eius obcaecati eos ipsum quo! <br>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perferendis officia minus impedit. Reiciendis debitis minima, illum ut doloribus cum at neque totam cumque excepturi est incidunt ipsam et, id ratione. <br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis tempore eaque sit ullam autem quisquam magnam et dignissimos, sapiente nisi libero quo repudiandae nobis pariatur sequi molestiae officia quae blanditiis?
+            <br>
+        </div>
+        <div class="con-info">
+            <strong>
+                Cost of the item : 
+            </strong> 
+            {{ modalImage.cost | currency:'INR':'symbol':'.1-1' }}
+        </div>
+    </div>
+</div>

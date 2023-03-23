@@ -1,0 +1,53 @@
+
+<div class="title text-center text-primary h1 mt-2">
+    SignUp Page
+  </div>
+  <div class="main-content">
+      <div class="form">
+          <form [formGroup]="userSignUp" (ngSubmit)="onSubmit()">
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Enter Your Name </mat-label>
+                  <input matInput placeholder="admin" formControlName="name">
+                  <mat-error *ngIf="userSignUp.controls['name'].hasError('required')">name is <strong>required</strong></mat-error>
+                </mat-form-field> 
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Enter Your mail id </mat-label>
+                    <input matInput placeholder="admin@gmail" formControlName="mail">
+                    <mat-error *ngIf="userSignUp.controls['mail'].hasError('required')">name is <strong>required</strong></mat-error>
+                    <mat-error *ngIf="userSignUp.controls['mail'].errors?.['minlength']">email is <strong>atleast 8 letters</strong></mat-error>
+                  </mat-form-field> 
+      
+                <mat-form-field appearance="outline">
+                  <mat-label>Enter your password </mat-label>
+                  <input matInput placeholder="password is atleast 8 letters" formControlName="password" [type]="hide ? 'password' : 'text'">
+                  <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                  <mat-error *ngIf="userSignUp.controls['password'].hasError('required')">password is <strong>required</strong></mat-error>
+                  <mat-error *ngIf="userSignUp.controls['password'].errors?.['minlength']">email is <strong>atleast 8 letters</strong></mat-error>
+                </mat-form-field> 
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Confirm your password </mat-label>
+                    <input #confirm matInput placeholder="password is atleast 8 letters" type="text">
+                    <span style="color: red;" *ngIf="confirmPassword">password is <strong>not matched</strong></span>
+                  </mat-form-field> 
+
+                <button [ngClass]="{'active' : confirmPassword}" class="button" mat-raised-button color="primary">
+                  Register
+                </button>  <br>
+                <span >
+                  OR
+                </span> <br>
+                <div class="text-center my-1">
+                  <strong style="color: blue;cursor: pointer;" (click)="toRegister()">
+                    Sign In
+                  </strong>
+                </div>
+                
+          </form>
+      </div>
+  </div>
+  

@@ -1,0 +1,71 @@
+.mat-stepper-horizontal {
+    margin-top: 8px;
+  }
+  
+  .mat-mdc-form-field {
+    margin-top: 16px;
+  }
+  
+  form {
+    max-width: 500px;
+    text-align: center;
+    margin: auto;
+    padding: 20px;
+    box-shadow: 1px 1px 5px gray;
+    border-radius: 0px 0px 25px 25px;
+  }
+
+  form mat-form-field {
+    width: 100%;
+  }
+
+  form mat-form-field.datepicker{
+    width: 80%;
+  }
+
+  .form .secondForm button {
+    margin: 10px;
+  }
+
+  .order_placed {
+    text-align: center;
+    font-size: 19px;
+    padding: 15px 30px;
+    line-height: 30px;
+    width: fit-content;
+    margin: auto;
+    position: absolute;
+    background-color: yellow;
+    left: 35%;
+    top: 100px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px gray;
+  }
+
+  .order_placed mat-icon {
+    color: red;
+    position: relative;
+    top: 5px;
+  }
+
+
+  .booked-items {
+    max-width: 450px;
+    margin: auto;
+    height: 400px;
+    overflow-y: scroll;
+  }
+
+  .booked-items img {
+    width: 100%;
+  }
+
+  .last-stage {
+    max-width: 450px;
+    padding: 20px;
+    margin: auto;
+  }
+
+  .last-action button {
+    margin: 10px;
+  }

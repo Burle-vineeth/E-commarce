@@ -1,0 +1,92 @@
+<mat-stepper linear #stepper>
+    <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
+
+        <form *ngIf="!placed" [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Fill out your name</ng-template>
+            <mat-form-field appearance="fill">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name" placeholder="Last name, First name" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Mobile Number</mat-label>
+                <input matInput formControlName="mobNum" placeholder="ex: xxxxx xxxxx" required type="tel">
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width datepicker" appearance="fill">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="expDate">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <button type="button" mat-raised-button (click)="picker.open()">Open</button>
+
+            <div>
+                <button mat-raised-button color='primary' matStepperNext>Next</button>
+            </div>
+        </form>
+
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+
+        <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Fill out your address</ng-template>
+
+            <mat-form-field appearance="fill">
+                <mat-label>City</mat-label>
+                <input matInput formControlName="city" placeholder="Ex. 1 Main St, New York, NY" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>District</mat-label>
+                <input matInput formControlName="dist" placeholder="Ex. 1 Main St, New York, NY" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>State</mat-label>
+                <input matInput formControlName="state" placeholder="Ex. 1 Main St, New York, NY" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Pin Code</mat-label>
+                <input matInput formControlName="pincode" placeholder="Ex. aa-bb-cc" required type="number">
+            </mat-form-field>
+
+            <div class="secondForm">
+                <button style="margin: 10px;" mat-raised-button matStepperPrevious color="primary">Back</button>
+                <button style="margin: 10px;" mat-raised-button color="primary" matStepperNext>Next</button>
+            </div>
+        </form>
+
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <div class="booked-items">
+            <div class="cart-block" *ngFor="let item of cartList" >
+                <img [src]="item.image" alt="">
+                <span>
+                    <strong>
+                        Item Name :
+                    </strong>
+                    {{ item.item }}
+                </span>
+            </div>
+        </div>
+        <div class="last-stage">
+            <p>You are now done by clicking the <strong>
+                Confirm Button
+            </strong> </p>
+            <div class="last-action">
+                <button mat-raised-button matStepperPrevious color="primary">Back</button>
+                <button mat-raised-button (click)="formSubmit()" color="warn">Confirm</button>
+            </div>
+        </div>
+    </mat-step>
+</mat-stepper>
+
+<div *ngIf="placed" class="order_placed">
+    Your Order is Successfully Placed <mat-icon>favorite</mat-icon>
+    <div> <strong>Total Amount : </strong>
+        {{ totalAmount | currency:'INR':'symbol':'.1-1'}}
+    </div>
+</div>

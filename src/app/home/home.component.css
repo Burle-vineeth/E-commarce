@@ -1,0 +1,40 @@
+.example-card {
+    max-width: 400px;
+  }
+
+  .example-card img {
+    width: 100%;
+  }
+
+  .block {
+    display: inline-block;
+    margin: 10px;
+    cursor: pointer;
+    box-shadow: 1px 1px 5px gray;
+  }
+
+  .whole {
+    z-index: 110;
+    position: fixed;
+    top: 0px;
+    overflow: scroll;
+    left: 0;
+    bottom: 0;
+    padding: 20px 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.452);
+  }
+
+  .whole .con {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 1px 1px 10px gray;
+    border-radius: 25px;
+  }
+
+  .whole .con img {
+    width: 100%;
+    margin-bottom: 10px;
+  }

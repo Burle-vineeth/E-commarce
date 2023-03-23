@@ -1,0 +1,39 @@
+
+<div class="title text-center text-primary h1 mt-2">
+  Login Page
+</div>
+<div class="main-content">
+    <div class="form">
+        <form [formGroup]="userSignUp" (ngSubmit)="onSubmit()">
+              <mat-form-field appearance="outline">
+                <mat-label>Enter the Mail Id </mat-label>
+                <input matInput placeholder="admin@mail.com" formControlName="mail">
+                <mat-error *ngIf="userSignUp.controls['mail'].hasError('required')">email is <strong>required</strong></mat-error>
+                <mat-error *ngIf="userSignUp.controls['mail'].errors?.['minlength']">email is <strong>atleast 8 letters</strong></mat-error>
+              </mat-form-field> 
+    
+              <mat-form-field appearance="outline">
+                <mat-label>Enter your password </mat-label>
+                <input matInput placeholder="password is atleast 8 letters" formControlName="password" [type]="hide ? 'password' : 'text'">
+                <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                <mat-error *ngIf="userSignUp.controls['password'].hasError('required')">password is <strong>required</strong></mat-error>
+                <mat-error *ngIf="userSignUp.controls['password'].errors?.['minlength']">email is <strong>atleast 8 letters</strong></mat-error>
+              </mat-form-field> 
+
+              <div *ngIf="confirmPassword">User <strong>not found</strong></div>
+              <button [ngClass]="{'active' : confirmPassword}" class="button" mat-raised-button color="primary">
+                Login
+              </button> <br>
+              <span >
+                OR
+              </span> <br>
+              <div class="text-center my-1">
+                <strong style="color: blue;cursor: pointer;" (click)="toRegister()">
+                  Register
+                </strong>
+              </div>
+        </form>
+    </div>
+</div>

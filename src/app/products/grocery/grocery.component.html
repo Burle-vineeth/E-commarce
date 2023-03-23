@@ -1,0 +1,48 @@
+<div class="addGro">
+    <div *ngIf="admin" class="action">
+        <button class="add" mat-raised-button color="primary" routerLink="add_groc">
+            Add Item
+        </button>
+    </div>
+    <div #i *ngFor="let item of items;index as i" class="block">
+        <mat-card class="example-card">
+            <mat-card-header>
+            </mat-card-header>
+            <img mat-card-image [src]="item.image" alt="Photo of a Shiba Inu">
+            <mat-card-content>
+                <p>
+                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. <strong class="text-primary" style="cursor: pointer;" (click)="singleItem(item)">
+                        more 
+                    </strong>
+                </p>
+                <p>
+                    <strong>
+                        Item Name: 
+                    </strong>
+                    {{item.item}}
+                </p>
+                <p>
+                    <strong>
+                        Cost: 
+                    </strong>
+                    {{ item.cost | currency:'INR':'symbol':'.1-1' }}
+                </p>
+            </mat-card-content>
+            <mat-card-actions align="end"><button *ngIf="admin" mat-raised-button color="primary" (click)="editItem(item,i)">
+                Edit
+            </button>
+                <button mat-raised-button color="primary" (click)="addCart(item)">Add Cart</button>
+                <button mat-raised-button color="warn" (click)="buynow(item)">Buy Now</button>
+            </mat-card-actions>
+        </mat-card>
+    </div> 
+</div>
+
+<div *ngIf="nolog" class="nolog">
+    Please Log In to add Items to the cart
+    <div>
+        <button (click)="logIn()" mat-raised-button color="primary">
+            log in
+        </button>
+    </div>
+</div>

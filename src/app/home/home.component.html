@@ -1,0 +1,37 @@
+<div *ngFor="let prod of product;index as i" class="block" (click)="selectedCard(i)">
+    <mat-card class="example-card">
+        <mat-card-header>
+        </mat-card-header>
+        <img mat-card-image [src]="prod" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+            <p>
+                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+                A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+                bred for hunting.
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button>LIKE</button>
+            <button mat-button>SHARE</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
+
+<div *ngIf="selected" class="whole">
+    <div class="con">
+        <img [src]="currImg" alt="">
+        <div class="img-info">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe eveniet laborum minima eaque error
+            dignissimos sint id voluptates quas, ex eligendi delectus minus, porro iste ullam sed molestias blanditiis
+            qui consequatur, omnis aspernatur suscipit earum doloribus deleniti? Magni dignissimos excepturi vitae odit
+            sed iure molestiae ipsa veritatis, beatae eius nulla voluptates omnis, alias vero asperiores cupiditate
+            obcaecati provident repudiandae consectetur rerum? Nesciunt quisquam sapiente, quibusdam culpa corrupti
+            rerum voluptatum doloremque voluptatibus sunt! Illum tempore natus quia sunt eveniet accusamus fuga
+            aspernatur similique officia! Qui amet, et quo quos praesentium dolorum, numquam est ipsam distinctio ipsum,
+            accusamus cupiditate quaerat sapiente ad. </div>
+        <button mat-raised-button color="primary" (click)="closeWhole()">
+            close
+        </button>
+    </div>
+
+</div>

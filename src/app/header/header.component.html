@@ -1,0 +1,46 @@
+
+<div class="main-content">
+    <div routerLink="home" class="block title">
+        Home <mat-icon style="position: relative;top: 5px;margin-top: -8px;">home</mat-icon>
+    </div>
+    <div routerLink="grocery" class="block">
+        Groceries
+    </div>
+    <div routerLink="fruits" class="block">
+        Fruits
+    </div>
+    <div routerLink="others" class="block">
+        Others
+    </div>
+    <div routerLink="mytasks" class="block">
+        My Tasks
+    </div>
+    <div class="block profile">
+        {{ profile }}
+        <div *ngIf="userDisplay" class="user">
+            <div class="my-2">
+                userName : {{profile}}
+            </div>
+            <button (click)="logOut()" mat-raised-button color="warn">
+                Log Out
+            </button>
+        </div>
+        <div *ngIf="!userDisplay" class="user">
+            <div class="my-2">
+                Experience Your self: 
+            </div>
+            <button (click)="logIn()" mat-raised-button color="primary">
+                Log In
+            </button>
+        </div>
+    </div>
+    <div routerLink="cart" class="block cart">
+        cart
+    </div>
+    <div class="block text">
+        <div class="wrap">
+            <input type="text" >
+            <mat-icon>search</mat-icon>
+        </div>
+    </div>
+</div>
