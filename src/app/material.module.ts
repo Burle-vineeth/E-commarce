@@ -13,7 +13,7 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatStepperModule } from "@angular/material/stepper";
 
 @NgModule({
-    exports: [
+    imports: [
         MatDatepickerModule,
         MatNativeDateModule,
         MatCardModule,
@@ -27,7 +27,7 @@ import { MatStepperModule } from "@angular/material/stepper";
         MatRadioModule,
         MatFormFieldModule,
     ],
-    imports: [
+    exports: [
         MatDatepickerModule,
         MatNativeDateModule,
         MatCardModule,
