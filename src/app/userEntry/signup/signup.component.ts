@@ -59,9 +59,13 @@ export class SignupComponent {
           } else {
             this.http.post('http://localhost:3000/Logins',this.userSignUp.value).subscribe( (data) => {
     
+            }, (err) => {
+              console.log(err);
             });
             this.router.navigateByUrl('login');
           }
+        }, (err) => {
+          console.log(err);
         })
        
       }

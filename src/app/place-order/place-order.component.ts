@@ -3,6 +3,7 @@ import { Component, Inject, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { flatMap } from 'rxjs';
+import { HttpServiceService } from '../http-service.service';
 import { LocalStorageToken } from '../local';
 
 @Component({
@@ -12,7 +13,7 @@ import { LocalStorageToken } from '../local';
 })
 export class PlaceOrderComponent {
 
-  constructor(private fb: FormBuilder, private router: Router, private http: HttpClient, @Inject(LocalStorageToken) private storage: Storage) { }
+  constructor(private fb: FormBuilder, private router: Router, private http: HttpClient, @Inject(LocalStorageToken) private storage: Storage,private httpService: HttpServiceService) { }
 
   firstFormGroup = this.fb.group({
     name: [null, [Validators.required]],
@@ -44,7 +45,7 @@ export class PlaceOrderComponent {
 
   ngOnInit() {
     this.cartList = [];
-    this.http.get('http://localhost:3000/Logins/' + this.id).subscribe( (data) => {
+    this.httpService.getUserLogin().subscribe( (data) => {
       this.renderData = data;
 
       for(let x = 0; x < this.renderData.items.length;x++) {
@@ -59,13 +60,17 @@ export class PlaceOrderComponent {
         this.cartList.push(this.renderData.others[x]);
       }
 
-    })
+    }, 
+    (err) => {
+      console.log(err);
+    }
+    )
   }
 
   formSubmit() {
     this.placed = true;
 
-    this.http.get('http://localhost:3000/Logins/' + this.id).subscribe((data) => {
+    this.httpService.getUserLogin().subscribe((data) => {
       this.userDetails = data;
       for (let i = 0; i < this.userDetails.items.length; i++) {
         this.userDetails.myorders.push(this.userDetails.items[i]);
@@ -87,6 +92,9 @@ export class PlaceOrderComponent {
       this.userDetails.others = [];
 
       this.updateUserDetails(this.userDetails);
+    },
+    (err) => {
+      console.log(err);
     })
     setTimeout(() => {
       this.router.navigateByUrl('/mytasks');
@@ -98,6 +106,10 @@ export class PlaceOrderComponent {
   updateUserDetails(data: any) {
     this.http.put('http://localhost:3000/Logins/' + this.id, data).subscribe((data) => {
       console.log(data);
+    },
+    (err) => {
+      console.log(err);
+      
     })
   }
 

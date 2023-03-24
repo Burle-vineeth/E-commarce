@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { flatMap } from 'rxjs';
+import { HttpServiceService } from 'src/app/http-service.service';
 import { LocalStorageToken } from 'src/app/local';
 import { EditserviceService } from 'src/app/userEntry/editservice.service';
 
@@ -22,14 +23,16 @@ export class GroceryComponent {
 
   nolog = false;
   
-  constructor(private http: HttpClient,@Inject(LocalStorageToken) private sotrage: Storage,private _snackBar: MatSnackBar,private router: Router,private editservice: EditserviceService) {}
+  constructor(private http: HttpClient,@Inject(LocalStorageToken) private sotrage: Storage,private _snackBar: MatSnackBar,private router: Router,private editservice: EditserviceService,private httpService: HttpServiceService) {}
 
   ngOnInit() {
     if(this.sotrage.getItem('userName') == "vin") {
       this.admin = true;
     }
-    this.http.get('http://localhost:3000/grocery').subscribe( (data) => {
+    this.httpService.thingsList('grocery').subscribe( (data) => {
       this.items = data;
+    },(err) => {
+      console.log(err);
     })
   }
 
@@ -39,7 +42,7 @@ export class GroceryComponent {
     this.id = this.sotrage.getItem('userId');
     if(this.id) {
       this.nolog = false;
-      this.http.get('http://localhost:3000/Logins/' + this.id).subscribe( (data) => {
+      this.httpService.getUserLogin().subscribe( (data) => {
         this.user = data;
   
         let found = true;
@@ -54,6 +57,8 @@ export class GroceryComponent {
         }
         this.sendCartData(data);
   
+      }, (err) => {
+        console.log(err);
       })
       return true;
     } else {
@@ -120,5 +125,4 @@ export class GroceryComponent {
   editItem(item:any,index:any) {
     this.editservice.editItem(item,index,'grocery')
   }
-  
 }

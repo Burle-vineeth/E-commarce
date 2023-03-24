@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpServiceService } from '../http-service.service';
 import { LocalStorageToken } from '../local';
 
 @Component({
@@ -11,7 +12,7 @@ import { LocalStorageToken } from '../local';
 export class MytasksComponent {
   empty = true;
 
-  constructor(private http:HttpClient,@Inject(LocalStorageToken) private storage: Storage,private router: Router) {}
+  constructor(private http:HttpClient,@Inject(LocalStorageToken) private storage: Storage,private router: Router,private httpService: HttpServiceService) {}
   id = this.storage.getItem('userId');
 
   orderedList : any;
@@ -25,8 +26,7 @@ export class MytasksComponent {
 
   ngOnInit(): void {
     if(this.id) {
-
-      this.http.get('http://localhost:3000/Logins/'+this.id).subscribe( (data) => {
+      this.httpService.getUserLogin().subscribe( (data) => {
         this.orderedList = data;
 
         this.fruitList = this.orderedList.myfruits;
@@ -42,7 +42,11 @@ export class MytasksComponent {
         } else {
           this.empty = true;
         }
-      })
+      }, 
+      (err) => {
+        console.log(err);
+      }
+      )
     }
   }
 

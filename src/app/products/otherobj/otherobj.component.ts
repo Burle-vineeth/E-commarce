@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { HttpServiceService } from 'src/app/http-service.service';
 import { LocalStorageToken } from 'src/app/local';
 import { EditserviceService } from 'src/app/userEntry/editservice.service';
 
@@ -21,14 +22,17 @@ export class OtherobjComponent {
 
   admin = false;
 
-  constructor(private http: HttpClient, @Inject(LocalStorageToken) private sotrage: Storage, private _snackBar: MatSnackBar, private router: Router,private editservice: EditserviceService) { }
+  constructor(private http: HttpClient, @Inject(LocalStorageToken) private sotrage: Storage, private _snackBar: MatSnackBar, private router: Router,private editservice: EditserviceService,private httpService: HttpServiceService) { }
 
   ngOnInit() {
     if (this.sotrage.getItem('userName') == "vin") {
       this.admin = true;
     }
-    this.http.get('http://localhost:3000/others').subscribe((data) => {
+    this.httpService.thingsList('others').subscribe((data) => {
       this.items = data;
+    }, (err) => {
+      console.log(err);
+      
     })
   }
 
@@ -37,7 +41,7 @@ export class OtherobjComponent {
   addCart(item: any) {
     this.id = this.sotrage.getItem('userId');
     if (this.id) {
-      this.http.get('http://localhost:3000/Logins/' + this.id).subscribe((data) => {
+      this.httpService.getUserLogin().subscribe((data) => {
         this.user = data;
 
         let found = true;
@@ -52,6 +56,9 @@ export class OtherobjComponent {
         }
 
         this.sendCartData(data);
+      }, (err) => {
+        console.log(err);
+        
       })
       return true;
     } else {
@@ -74,6 +81,9 @@ export class OtherobjComponent {
     this.http.put("http://localhost:3000/Logins/" + this.id, data).subscribe((param) => {
       // console.log(param);
       this.openSnackBar();
+    }, (err) => {
+      console.log(err);
+      
     })
   }
 

@@ -6,6 +6,7 @@ import { Router, TitleStrategy } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LocalStorageToken } from 'src/app/local';
 import { LogserviceService } from 'src/app/logservice.service';
+import { HttpServiceService } from 'src/app/http-service.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent {
 
   hide = true;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router,private _snackBar: MatSnackBar,private logservice: LogserviceService,@Inject(LocalStorageToken) private storage: Storage) { }
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router,private _snackBar: MatSnackBar,private logservice: LogserviceService,@Inject(LocalStorageToken) private storage: Storage,private httpService: HttpServiceService) { }
 
   userSignUp = this.fb.group({
     mail: ['', [Validators.minLength(8), Validators.required]],
@@ -54,6 +55,9 @@ export class LoginComponent {
         if(found == false) {
           this.openSnackBar();
         }
+      }, (err) => {
+        console.log(err);
+        
       })
     }
   }

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { HttpServiceService } from '../http-service.service';
 import { LocalStorageToken } from '../local';
 
 @Component({
@@ -23,7 +24,7 @@ export class CartComponent {
   thirdListLen: any;
 
   spin = false;
-  constructor(@Inject(LocalStorageToken) private storage: Storage,private http: HttpClient,private _snackBar: MatSnackBar,private router: Router) {}
+  constructor(@Inject(LocalStorageToken) private storage: Storage,private http: HttpClient,private _snackBar: MatSnackBar,private router: Router,private httpService: HttpServiceService) {}
 
   id = this.storage.getItem('userId');
   user = this.storage.getItem('userName');
@@ -34,7 +35,7 @@ export class CartComponent {
       if(this.user) {
         this.admin = true;
       }
-      this.http.get('http://localhost:3000/Logins/'+this.id).subscribe( (data) => {
+      this.httpService.getUserLogin().subscribe( (data) => {
         this.itemList = data;
   
         this.firstList = this.itemList.items;
@@ -51,7 +52,11 @@ export class CartComponent {
           this.empty = true;
         }
   
-      });
+      },
+      (err) => {
+        console.log(err);
+      }
+      );
     }
   }
 
@@ -62,7 +67,7 @@ export class CartComponent {
     
     setTimeout(() => {
       console.log(index,this.firstListLen,this.secondListLen,this.thirdListLen,'1st');
-      this.http.get('http://localhost:3000/Logins/'+this.id).subscribe( (data) => {
+      this.httpService.getUserLogin().subscribe( (data) => {
         this.removingData = data;
         
         if(listNum == 1) { 

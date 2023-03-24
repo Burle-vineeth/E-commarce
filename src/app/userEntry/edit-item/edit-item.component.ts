@@ -46,6 +46,9 @@ export class EditItemComponent {
 
       this.http.put('http://localhost:3000/' + this.editUrl + '/' + this.itemRenderIndex, this.groceryItem.value).subscribe((data) => {
           console.log(data);
+        }, (err) => {
+          console.log(err);
+          
         })
 
       this.openSnackBar();

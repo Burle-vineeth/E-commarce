@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { HttpServiceService } from 'src/app/http-service.service';
 
 @Component({
   selector: 'app-addgrocery',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./addgrocery.component.css']
 })
 export class AddgroceryComponent {
-  constructor(private fb: FormBuilder,private http: HttpClient,private router: Router,private _snackBar: MatSnackBar) {}
+  constructor(private fb: FormBuilder,private http: HttpClient,private router: Router,private _snackBar: MatSnackBar,private httpService: HttpServiceService) {}
 
   groceryItem = this.fb.group({
     item : ['',Validators.required],
@@ -20,10 +21,16 @@ export class AddgroceryComponent {
   })
 
   addItem() {
-    if(this.groceryItem.valid) {
-      this.http.post('http://localhost:3000/grocery',this.groceryItem.value).subscribe( (data) => {
-        console.log(data);
-      })
+    if (this.groceryItem.valid) {
+      let result = this.httpService.adminAddItem('grocery', this.groceryItem.value);
+      result.subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (err) => {
+          console.log(err);
+        }
+        )
       this.openSnackBar();
     }
     this.clearItem();
